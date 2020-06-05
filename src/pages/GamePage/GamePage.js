@@ -6,7 +6,7 @@ const API_URL = 'http://acnhapi.com/v1/villagers/';
 class GamePage extends Component {
     state = {
         villager: {},
-        villagerNames: []
+        villagerNames: [],
     }
 
     getVillager = () => {
@@ -18,10 +18,12 @@ class GamePage extends Component {
                 let villagerName = result.data.name['name-USen'];
                 console.log(villagerName);
                 let villagerImage = result.data.image_uri;
+                let villagerIcon =result.data.icon_uri;
                 this.setState({
                     villager: {
                         name: villagerName,
-                        image: villagerImage
+                        image: villagerImage,
+                        icon:villagerIcon
                     }
                 })
             })
@@ -39,10 +41,11 @@ class GamePage extends Component {
                 let otherVillagerName2 = result.data.name['name-USen'];
                 let otherVillagerName3 = result.data.name['name-USen'];
                 let otherVillagerName4 = result.data.name['name-USen'];
+                let otherVillagerName5 = result.data.name['name-USen'];
 
                 this.setState({
                     villagerNames: [
-                        otherVillagerName2, otherVillagerName3, otherVillagerName4
+                        otherVillagerName2, otherVillagerName3, otherVillagerName4,otherVillagerName5
                     ]
                 })
             })
@@ -61,27 +64,28 @@ class GamePage extends Component {
         return (
             <div className="game">
                 <div className="game-card">
-                    <div className="game-card__image">
-                        "Image"
-                    </div>
-                    <div className="game-card__question">
-                        "Question"
+                    <div className="game-card__image-wrapper">
+                        <img src={this.state.villager.image} className="game-card__image">
+                        </img>
+                        
+                    <div className="game-card__question-wrapper">
+                      <img src={this.state.villager.icon} className="game-card__icon"/>
+                      <p className='game-card__question'>
+                         Who is this villager? 
+                      </p>
+                      
                     </div>
                     <div className="game-card__answer-wrapper">
-                        <p className="game-card__answer game-card__answer-one">
-                            "Answer"
-                        </p>
-                        <p className="game-card__answer game-card__answer-two">
-                            "Answer"
-                        </p>
-                        <p className="game-card__answer game-card__answer-three">
-                            "Answer"
-                        </p>
-                        <p className="game-card__answer game-card__answer-four">
-                            "Answer"
-                        </p>
+                        {this.state.villagerNames.map(name => {
+                            return (
+                                <p className="game-card__answer game-card__answer-one">
+                                    {name}
+                                </p>
+                            )
+                            })}
                     </div>
                 </div>
+            </div>
             </div>
         )
     }
