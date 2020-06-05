@@ -12,7 +12,7 @@
    border-radius:10px;
    width:25%;
    padding:1rem;
-
+   position: relative;
    &__image-wrapper{
       padding:0.5rem;
       border-radius:5px;
@@ -62,6 +62,47 @@
          background-color: #ffc7c9;
          color:#014D6D;
       }
+   }
+
+   &__next{
+      padding:0.5rem 0;
+      background-color: #ffc7c9;
+      border: 0;
+      border-radius:5px;
+      color:#014D6D;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-weight:700;
+      font-size: 15px;
+      width:45%;
+      &:hover{
+         background-color: #014D6D;
+         color:#ffc7c9;
+      }
+   }
+   &__point{
+      position: absolute;
+      bottom:20px;
+      right:100px;
+      background-color: #014D6D;
+      padding:1rem;
+      border-radius: 5px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-weight:700;
+      font-size: 30px;
+      color:#ffc7c9;
+   }
+
+   &__life{
+      position: absolute;
+      bottom:20px;
+      right:250px;
+      background-color:#ffc7c9 ;
+      padding:1rem;
+      border-radius: 5px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-weight:700;
+      font-size: 30px;
+      color:#014D6D;
    }
 }
 // colors #DA2A47 #FFC7C9 #014D6D #069AA8

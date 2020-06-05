@@ -7,6 +7,8 @@ class GamePage extends Component {
     state = {
         villager: {},
         villagerNames: [],
+        userLife:5,
+        userPoint:0
     }
 
     getVillager = () => {
@@ -59,20 +61,49 @@ class GamePage extends Component {
         console.log(name);
         if (name === this.state.villager.name) {
             alert("You guessed it right!");
-            this.setState({
-                villager: {},
-                villagerNames: []
+            this.setState(prevState=>{
+                return{
+                    villager: {},
+                    villagerNames: [],
+                    userPoint: prevState.userPoint + 1
+                }
             })
             this.getVillager();
             this.getOtherVillager();
             this.getOtherVillager();
             this.getOtherVillager();
         } else {
+            this.setState(prevState=>{
+                return{
+                villager: {},
+                villagerNames: [],
+                userLife: prevState.userLife - 1
+                }
+            })
 
         }
     }
 
+    // pointCounter=()=>{
+    //     this.setState(prevState => {
+    //         return {points: prevState.points + 1}
+    //      })
+    // }
+
+    nextVillager=(e)=>{
+        this.setState({
+            villager: {},
+            villagerNames: [],
+        })
+       e.preventDefault();
+       this.getVillager();
+        this.getOtherVillager();
+        this.getOtherVillager();
+        this.getOtherVillager();
+    }
+
     render() {
+
         let shuffledArray = (this.state.villagerNames).sort(() => Math.random() - 0.5);
 
         return (
@@ -81,7 +112,6 @@ class GamePage extends Component {
                     <div className="game-card__image-wrapper">
                         <img src={this.state.villager.image} className="game-card__image">
                         </img>
-                        
                     <div className="game-card__question-wrapper">
                       <img src={this.state.villager.icon} className="game-card__icon"/>
                       <p className='game-card__question'>
@@ -92,14 +122,27 @@ class GamePage extends Component {
                     <div className="game-card__answer-wrapper">
                         {this.state.villagerNames.map(name => {
                             return (
-                                <p className="game-card__answer game-card__answer-one">
+                                <p className="game-card__answer game-card__answer-one" >
                                     {name}
                                 </p>
                             )
                             })}
                     </div>
+                    <button className="game-card__next" onClick={this.nextVillager}>
+                        Next Villager
+                    </button>
                 </div>
-            </div>
+                </div>
+                <div className="game-card__point">
+                    Points
+                    <br/>
+                    {this.state.userPoint}
+                </div>
+                <div className="game-card__life">
+                    Life
+                    <br/>
+                    {this.state.userLife}
+                </div>
             </div>
         )
     }
