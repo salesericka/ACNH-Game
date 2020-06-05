@@ -8,7 +8,8 @@ class GamePage extends Component {
         villager: {},
         villagerNames: [],
         userLife:5,
-        userPoint:0
+        userPoint:0,
+        lifeLabel:"game-card__life"
     }
 
     getVillager = () => {
@@ -84,12 +85,6 @@ class GamePage extends Component {
         }
     }
 
-    // pointCounter=()=>{
-    //     this.setState(prevState => {
-    //         return {points: prevState.points + 1}
-    //      })
-    // }
-
     nextVillager=(e)=>{
         this.setState({
             villager: {},
@@ -100,6 +95,17 @@ class GamePage extends Component {
         this.getOtherVillager();
         this.getOtherVillager();
         this.getOtherVillager();
+    }
+
+    lifeCounter =()=>{
+        if(this.state.userLife === 0) {
+            this.setState({
+                lifeLabel:"hide__no-life",
+                userLife:"Over!"
+            })
+        }else{
+
+        }
     }
 
     render() {
@@ -138,7 +144,7 @@ class GamePage extends Component {
                     <br/>
                     {this.state.userPoint}
                 </div>
-                <div className="game-card__life">
+                <div className={this.state.lifeLabel} onCLick={this.lifeCounter}>
                     Life
                     <br/>
                     {this.state.userLife}
