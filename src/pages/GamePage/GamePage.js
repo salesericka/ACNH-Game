@@ -23,6 +23,7 @@ class GamePage extends Component {
                     villager: {
                         name: villagerName,
                         image: villagerImage,
+                        icon:villagerIcon
                     },
                     villagerNames: [...this.state.villagerNames, villagerName]
                 })
