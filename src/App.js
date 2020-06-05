@@ -1,15 +1,19 @@
 import React from 'react';
 import './App.scss';
-import { BrowserRouter, Link, Switch } from 'react-router-dom';
+import HomePage from './pages/HomePage/HomePage'
+import { BrowserRouter, Link, Switch, Route} from 'react-router-dom';
 
 
 function App() {
   return (
-    <BrowserRouter>
-      <Switch>
-
-      </Switch>
-    </BrowserRouter>
+    <div className="App">
+      <BrowserRouter>
+        <Switch>
+          <Route to="/" exact component ={HomePage}/>
+          {/* <Route to="/game" component={GamePage}/> */}
+        </Switch>
+      </BrowserRouter>
+    </div>
   );
 }
 
