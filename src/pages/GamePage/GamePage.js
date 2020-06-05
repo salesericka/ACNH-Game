@@ -13,7 +13,8 @@ class GamePage extends Component {
         userLife:5,
         userPoint:0,
         lifeLabel:"game-card__life",
-        message: ""
+        message: "",
+        round: 0
     }
 
     getVillager = () => {
@@ -32,7 +33,8 @@ class GamePage extends Component {
                         image: villagerImage,
                         icon:villagerIcon
                     },
-                    villagerNames: [...this.state.villagerNames, villagerName]
+                    villagerNames: [...this.state.villagerNames, villagerName],
+                    round: this.state.round+1
                 })
                 console.log(this.state);
             })
@@ -81,12 +83,17 @@ class GamePage extends Component {
         } else {
             this.setState(prevState=>{
                 return{
+                    
                 villager: {},
                 villagerNames: [],
-                userLife: prevState.userLife - 1
+                userLife: prevState.userLife - 1,
+                message: ""
                 }
             })
-
+            this.getVillager();
+            this.getOtherVillager();
+            this.getOtherVillager();
+            this.getOtherVillager();
         }
     }
 
@@ -94,9 +101,11 @@ class GamePage extends Component {
         this.setState({
             villager: {},
             villagerNames: [],
+            message: ""
         })
-       e.preventDefault();
-       this.getVillager();
+
+        e.preventDefault();
+        this.getVillager();
         this.getOtherVillager();
         this.getOtherVillager();
         this.getOtherVillager();
@@ -129,7 +138,8 @@ class GamePage extends Component {
         this.setState({
             villager: {},
             villagerNames: [],
-            message: ""
+            message: "",
+            userLife: this.state.userLife-1
         })
 
         this.getVillager();
@@ -145,26 +155,9 @@ class GamePage extends Component {
         return (
             <div className="game">
                 <div className="game-card">
-                    <div className="game-card__image-wrapper" key={4000}>
-                        <Countdown date={Date.now() + 4000} onComplete={() => this.timeIsOut()} autoStart={true} />
-                        {/* <Timer
-                            initialTime={4000}
-                            direction="backward"
-                            startImmediately={true}
-                            key={4000}
-                            checkpoints={[
-                                {
-                                    time: 0,
-                                    callback: () => this.timeIsOut(),
-                                },
-                            ]}
-                        >
-                            {() => (
-                                <React.Fragment>
-                                    <Timer.Seconds /> seconds
-                                </React.Fragment>
-                            )}
-                        </Timer> */}
+                    <div className="game-card__image-wrapper">
+                        <Countdown date={Date.now() + 15000} onComplete={() => this.timeIsOut()} autoStart={true} key={this.state.round} />
+
                         <img src={this.state.villager.image} className="game-card__image">
                         </img>
                         <p>{this.state.message}</p>
