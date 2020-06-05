@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import "./GamePage.scss";
+import Timer from 'react-compound-timer';
+import Countdown from 'react-countdown';
+
 const API_URL = 'http://acnhapi.com/v1/villagers/';
 
 class GamePage extends Component {
@@ -9,7 +12,8 @@ class GamePage extends Component {
         villagerNames: [],
         userLife:5,
         userPoint:0,
-        lifeLabel:"game-card__life"
+        lifeLabel:"game-card__life",
+        message: ""
     }
 
     getVillager = () => {
@@ -52,6 +56,7 @@ class GamePage extends Component {
     }
 
     componentDidMount() {
+
         this.getVillager();
         this.getOtherVillager();
         this.getOtherVillager();
@@ -61,12 +66,12 @@ class GamePage extends Component {
     letsPlay(name) {
         console.log(name);
         if (name === this.state.villager.name) {
-            alert("You guessed it right!");
             this.setState(prevState=>{
                 return{
                     villager: {},
                     villagerNames: [],
-                    userPoint: prevState.userPoint + 1
+                    userPoint: prevState.userPoint + 1,
+                    message:`You guessed it right! This is ${name}.`
                 }
             })
             this.getVillager();
@@ -104,8 +109,33 @@ class GamePage extends Component {
                 userLife:"Over!"
             })
         }else{
+            setTimeout(() => {
+                this.setState({
+                    villager: {},
+                    villagerNames: [],
+                    message: ""
+                })
 
+                this.getVillager();
+                this.getOtherVillager();
+                this.getOtherVillager();
+                this.getOtherVillager();
+
+            }, 3000);
         }
+    }
+
+    timeIsOut() {
+        this.setState({
+            villager: {},
+            villagerNames: [],
+            message: ""
+        })
+
+        this.getVillager();
+        this.getOtherVillager();
+        this.getOtherVillager();
+        this.getOtherVillager();
     }
 
     render() {
@@ -115,20 +145,41 @@ class GamePage extends Component {
         return (
             <div className="game">
                 <div className="game-card">
-                    <div className="game-card__image-wrapper">
+                    <div className="game-card__image-wrapper" key={4000}>
+                        <Countdown date={Date.now() + 4000} onComplete={() => this.timeIsOut()} autoStart={true} />
+                        {/* <Timer
+                            initialTime={4000}
+                            direction="backward"
+                            startImmediately={true}
+                            key={4000}
+                            checkpoints={[
+                                {
+                                    time: 0,
+                                    callback: () => this.timeIsOut(),
+                                },
+                            ]}
+                        >
+                            {() => (
+                                <React.Fragment>
+                                    <Timer.Seconds /> seconds
+                                </React.Fragment>
+                            )}
+                        </Timer> */}
                         <img src={this.state.villager.image} className="game-card__image">
                         </img>
+                        <p>{this.state.message}</p>
                     <div className="game-card__question-wrapper">
-                      <img src={this.state.villager.icon} className="game-card__icon"/>
-                      <p className='game-card__question'>
-                         Who is this villager? 
-                      </p>
-                      
+                        <img src={this.state.villager.icon} className="game-card__icon"/>
+                        <p className='game-card__question'>
+                            Who is this villager? 
+                        </p>
+
                     </div>
                     <div className="game-card__answer-wrapper">
                         {this.state.villagerNames.map(name => {
                             return (
-                                <p className="game-card__answer game-card__answer-one" >
+
+                                <p className="game-card__answer game-card__answer-one" onClick={() => this.letsPlay(name)}>
                                     {name}
                                 </p>
                             )
