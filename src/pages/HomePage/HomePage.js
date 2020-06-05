@@ -1,7 +1,6 @@
 import React from 'react';
 import './HomePage.scss';
-import { BrowserRouter, Link, Switch } from 'react-router-dom';
-import logo from '../../assets/NewHorizons.png';
+import {Link} from 'react-router-dom';
 
 function HomePage() {
   return (
