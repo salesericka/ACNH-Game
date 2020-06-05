@@ -22,50 +22,65 @@ class GamePage extends Component {
                 this.setState({
                     villager: {
                         name: villagerName,
-                        image: villagerImage
-                    }
+                        image: villagerImage,
+                    },
+                    villagerNames: [...this.state.villagerNames, villagerName]
                 })
+                console.log(this.state);
             })
             .catch(err => {
                 console.log(err);
             })
     }
 
-    getOtherVillagers = () => {
+    getOtherVillager = () => {
         let otherVillagerId = (Math.floor(Math.random() * 391) + 1);
 
         axios
             .get(API_URL + otherVillagerId)
             .then(result => {
-                let otherVillagerName2 = result.data.name['name-USen'];
-                let otherVillagerName3 = result.data.name['name-USen'];
-                let otherVillagerName4 = result.data.name['name-USen'];
+                let otherVillagerName = result.data.name['name-USen'];
 
                 this.setState({
-                    villagerNames: [
-                        otherVillagerName2, otherVillagerName3, otherVillagerName4
-                    ]
+                    villagerNames: [...this.state.villagerNames, otherVillagerName]
                 })
             })
     }
 
-    letsPlay() {
-
-    }
-
     componentDidMount() {
         this.getVillager();
-        this.getOtherVillagers();
+        this.getOtherVillager();
+        this.getOtherVillager();
+        this.getOtherVillager();
+    }
+
+    letsPlay(name) {
+        console.log(name);
+        if (name === this.state.villager.name) {
+            alert("You guessed it right!");
+            this.setState({
+                villager: {},
+                villagerNames: []
+            })
+            this.getVillager();
+            this.getOtherVillager();
+            this.getOtherVillager();
+            this.getOtherVillager();
+        } else {
+
+        }
     }
 
     render() {
+        let shuffledArray = (this.state.villagerNames).sort(() => Math.random() - 0.5);
+
         return (
             <>
                 <div>
                     <img src={this.state.villager.image}></img>
-                    {this.state.villagerNames.map(name => {
+                    {shuffledArray.map(name => {
                         return (
-                            <p>{name}</p>
+                            <p onClick={() => this.letsPlay(name)}>{name}</p>
                         )
                         })}
                 </div>
