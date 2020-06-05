@@ -1,11 +1,9 @@
 import React from 'react';
 import './App.scss';
 import GamePage from './pages/GamePage/GamePage';
-import { BrowserRouter, Link, Switch, Route} from 'react-router-dom';
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import HomePage from './pages/HomePage/HomePage';
 import Header from './pages/Header/Header';
-
-
 
 function App() {
   return (
@@ -13,7 +11,7 @@ function App() {
       <BrowserRouter>
         <Header/>
         <Switch>
-          <Route path="/" exact component ={HomePage}/>
+          <Route path="/" exact component={HomePage}/>
           <Route path="/game" component={GamePage}/>
         </Switch>
       </BrowserRouter>
