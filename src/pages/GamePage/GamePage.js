@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import "./GamePage.scss";
-
 const API_URL = 'http://acnhapi.com/v1/villagers/';
 
 class GamePage extends Component {
@@ -60,16 +59,30 @@ class GamePage extends Component {
 
     render() {
         return (
-            <>
-                <div>
-                    <img src={this.state.villager.image}></img>
-                    {this.state.villagerNames.map(name => {
-                        return (
-                            <p>{name}</p>
-                        )
-                        })}
+            <div className="game">
+                <div className="game-card">
+                    <div className="game-card__image">
+                        "Image"
+                    </div>
+                    <div className="game-card__question">
+                        "Question"
+                    </div>
+                    <div className="game-card__answer-wrapper">
+                        <p className="game-card__answer game-card__answer-one">
+                            "Answer"
+                        </p>
+                        <p className="game-card__answer game-card__answer-two">
+                            "Answer"
+                        </p>
+                        <p className="game-card__answer game-card__answer-three">
+                            "Answer"
+                        </p>
+                        <p className="game-card__answer game-card__answer-four">
+                            "Answer"
+                        </p>
+                    </div>
                 </div>
-            </>
+            </div>
         )
     }
 }
