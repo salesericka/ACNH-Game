@@ -1,0 +1,67 @@
+.game{
+   align-content: center;
+   align-items:center;
+   text-align: center;
+   width:100%;
+}
+
+.game-card{
+   background-color:#069AA8;
+   box-sizing: content-box;
+   margin:0 auto 1rem auto;
+   border-radius:10px;
+   width:25%;
+   padding:1rem;
+
+   &__image-wrapper{
+      padding:0.5rem;
+      border-radius:5px;
+   }
+
+   &__image{
+      width:100%;
+      border-radius:5px;
+   }
+
+   &__question-wrapper{
+      display:flex;
+      margin-top:1rem;
+      border-radius:5px;
+      justify-content:center;
+      vertical-align: center;
+   }
+   &__icon{
+      width:20%;
+      margin-right:1rem;
+   }
+   &__question{
+      color:white;
+      font-weight:700;
+      font-size:20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+   }
+   
+   &__answer-wrapper{
+      margin-top:1rem;
+      padding:0 0.5rem;
+      display:flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+   }
+
+   &__answer{
+      padding:0.5rem 0;
+      background-color:#014D6D;
+      border-radius:5px;
+      color:white;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-weight:700;
+      font-size: 15px;
+      width:45%;
+      &:hover{
+         background-color: #ffc7c9;
+         color:#014D6D;
+      }
+   }
+}
+// colors #DA2A47 #FFC7C9 #014D6D #069AA8
