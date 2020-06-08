@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import "./GamePage.scss";
-import Timer from 'react-compound-timer';
 import Countdown from 'react-countdown';
 
 const API_URL = 'http://acnhapi.com/v1/villagers/';
@@ -10,8 +9,8 @@ class GamePage extends Component {
     state = {
         villager: {},
         villagerNames: [],
-        userLife:5,
-        userPoint:0,
+        userLife: 5,
+        userPoint: 0,
         lifeLabel:"game-card__life",
         message: "",
         round: 0
@@ -24,7 +23,6 @@ class GamePage extends Component {
             .get(API_URL + villagerId)
             .then(result => {
                 let villagerName = result.data.name['name-USen'];
-                console.log(villagerName);
                 let villagerImage = result.data.image_uri;
                 let villagerIcon =result.data.icon_uri;
                 this.setState({
@@ -36,7 +34,6 @@ class GamePage extends Component {
                     villagerNames: [...this.state.villagerNames, villagerName],
                     round: this.state.round+1
                 })
-                console.log(this.state);
             })
             .catch(err => {
                 console.log(err);
@@ -66,10 +63,9 @@ class GamePage extends Component {
     }
 
     letsPlay(name) {
-        console.log(name);
         if (name === this.state.villager.name) {
-            this.setState(prevState=>{
-                return{
+            this.setState(prevState => {
+                return {
                     userPoint: prevState.userPoint + 1,
                     message:`You guessed it right! This is ${name}.`
                 }
@@ -86,10 +82,16 @@ class GamePage extends Component {
                 this.getOtherVillager();
             }, 3000);
 
+        } else if (this.state.userLife === 1) {
+            this.setState({
+                lifeLabel:"hide__no-life",
+                userLife: 0,
+                message: "Game Over!"
+            }) 
+        
         } else {
-            this.setState(prevState=>{
-                return{
-                    
+            this.setState(prevState => {
+                return {                    
                 villager: {},
                 villagerNames: [],
                 userLife: prevState.userLife - 1,
@@ -103,7 +105,7 @@ class GamePage extends Component {
         }
     }
 
-    nextVillager=(e)=>{
+    nextVillager = (e) => {
         this.setState({
             villager: {},
             villagerNames: [],
@@ -117,56 +119,48 @@ class GamePage extends Component {
         this.getOtherVillager();
     }
 
-    lifeCounter =()=>{
-        if(this.state.userLife === 0) {
+    timeIsOut() {
+        if (this.state.userLife === 1) {
             this.setState({
                 lifeLabel:"hide__no-life",
-                userLife:"Over!"
+                userLife: 0,
+                message: "Game Over!"
+            }) 
+        } else if (this.state.userLife > 1) {
+            this.setState({
+                villager: {},
+                villagerNames: [],
+                message: "",
+                userLife: this.state.userLife-1
             })
-        }else{
-            setTimeout(() => {
-                this.setState({
-                    villager: {},
-                    villagerNames: [],
-                    message: ""
-                })
-
-                this.getVillager();
-                this.getOtherVillager();
-                this.getOtherVillager();
-                this.getOtherVillager();
-
-            }, 3000);
+    
+            this.getVillager();
+            this.getOtherVillager();
+            this.getOtherVillager();
+            this.getOtherVillager();
         }
-    }
-
-    timeIsOut() {
-        this.setState({
-            villager: {},
-            villagerNames: [],
-            message: "",
-            userLife: this.state.userLife-1
-        })
-
-        this.getVillager();
-        this.getOtherVillager();
-        this.getOtherVillager();
-        this.getOtherVillager();
     }
 
     render() {
 
         let shuffledArray = (this.state.villagerNames).sort(() => Math.random() - 0.5);
+        
+        let notPlayingClass = "";
+        let gameOverClass = "gameOver";
+        if (this.state.userLife === 0) {
+            notPlayingClass = "notPlaying";
+            gameOverClass = "";
+        }
 
         return (
             <div className="game">
-                <div className="game-card">
+                <div className={"game-card " + notPlayingClass}>
                     <div className="game-card__image-wrapper timer">
                         <h2><Countdown date={Date.now() + 15000} onComplete={() => this.timeIsOut()} autoStart={true} key={this.state.round} renderer={({ hours, minutes, seconds, completed }) => <span>{seconds} seconds left</span>} /></h2>
 
                         <img src={this.state.villager.image} className="game-card__image">
                         </img>
-                        <p className>{this.state.message}</p>
+                        <p className="game-card__correctAnswer">{this.state.message}</p>
                     <div className="game-card__question-wrapper">
                         <img src={this.state.villager.icon} className="game-card__icon"/>
                         <p className='game-card__question'>
@@ -175,7 +169,7 @@ class GamePage extends Component {
 
                     </div>
                     <div className="game-card__answer-wrapper">
-                        {this.state.villagerNames.map(name => {
+                        {shuffledArray.map(name => {
                             return (
 
                                 <p className="game-card__answer game-card__answer-one" onClick={() => this.letsPlay(name)}>
@@ -189,12 +183,15 @@ class GamePage extends Component {
                     </button>
                 </div>
                 </div>
+                <div className={"game-card " + gameOverClass}>
+                    <h3>Game Over</h3>
+                </div>
                 <div className="game-card__point">
                     Points
                     <br/>
                     {this.state.userPoint}
                 </div>
-                <div className={this.state.lifeLabel} onCLick={this.lifeCounter}>
+                <div className={this.state.lifeLabel}>
                     Life
                     <br/>
                     {this.state.userLife}
