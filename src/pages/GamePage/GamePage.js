@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 import "./GamePage.scss";
 import Countdown from 'react-countdown';
@@ -29,7 +30,7 @@ class GamePage extends Component {
                     villager: {
                         name: villagerName,
                         image: villagerImage,
-                        icon:villagerIcon
+                        icon: villagerIcon
                     },
                     villagerNames: [...this.state.villagerNames, villagerName],
                     round: this.state.round+1
@@ -146,9 +147,13 @@ class GamePage extends Component {
         let shuffledArray = (this.state.villagerNames).sort(() => Math.random() - 0.5);
         
         let notPlayingClass = "";
+        let gameOverStyle = "";
+        let gameOverButton = "";
         let gameOverClass = "gameOver";
         if (this.state.userLife === 0) {
             notPlayingClass = "notPlaying";
+            gameOverStyle = "gameOverStyle";
+            gameOverButton = "gameOverButton";
             gameOverClass = "";
         }
 
@@ -158,33 +163,37 @@ class GamePage extends Component {
                     <div className="game-card__image-wrapper timer">
                         <h2><Countdown date={Date.now() + 15000} onComplete={() => this.timeIsOut()} autoStart={true} key={this.state.round} renderer={({ hours, minutes, seconds, completed }) => <span>{seconds} seconds left</span>} /></h2>
 
-                        <img src={this.state.villager.image} className="game-card__image">
+                        <img src={this.state.villager.image} className="game-card__image" alt="">
                         </img>
                         <p className="game-card__correctAnswer">{this.state.message}</p>
                     <div className="game-card__question-wrapper">
-                        <img src={this.state.villager.icon} className="game-card__icon"/>
+                        <img src={this.state.villager.icon} className="game-card__icon" alt=""/>
                         <p className='game-card__question'>
                             Who is this villager? 
                         </p>
 
                     </div>
                     <div className="game-card__answer-wrapper">
-                        {shuffledArray.map(name => {
+                        {shuffledArray.map((name, i) => {
                             return (
-
-                                <p className="game-card__answer game-card__answer-one" onClick={() => this.letsPlay(name)}>
+                                <p key={i} className="game-card__answer game-card__answer-one" onClick={() => this.letsPlay(name)}>
                                     {name}
                                 </p>
                             )
                             })}
                     </div>
-                    <button className="game-card__next" onClick={this.nextVillager}>
+                    {/* <button className="game-card__next" onClick={this.nextVillager}>
                         Next Villager
-                    </button>
+                    </button> */}
                 </div>
+                </div>
+                <div className={"game-card " + gameOverClass + gameOverStyle}>
+                    <h3>Game Over</h3>
                 </div>
                 <div className={"game-card " + gameOverClass}>
-                    <h3>Game Over</h3>
+                    <Link onClick={() => window.location.reload()} to="/game" className={"game-card " + gameOverButton}>
+                        Play Again!
+                    </Link> 
                 </div>
                 <div className="game-card__point">
                     Points
