@@ -8,13 +8,13 @@ This is project was created for a one-day hackathon in BrainStation.
 ## Features:
 #### 1. Home Page
    - enjoy the music before starting the game.
-![Home Page](./src/assets/Home.png)
+![Home Page](./screenshots/Home.png)
 
 #### 2. Play Game
    - tracks how many villagers you guess correctly
    - 15 second countdown
    - when life hits 0, game over!
-![Play Game](./src/assets/Game.png)
+![Play Game](./screenshots/Game.png)
 
 #### 3. Play Again
-![Play Again](./src/assets/Over.png)
+![Play Again](./screenshots/Over.png)
