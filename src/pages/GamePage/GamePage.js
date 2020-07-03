@@ -43,7 +43,6 @@ class GamePage extends Component {
 
     getOtherVillager = () => {
         let otherVillagerId = (Math.floor(Math.random() * 391) + 1);
-
         axios
             .get(API_URL + otherVillagerId)
             .then(result => {
@@ -182,9 +181,6 @@ class GamePage extends Component {
                             )
                             })}
                     </div>
-                    {/* <button className="game-card__next" onClick={this.nextVillager}>
-                        Next Villager
-                    </button> */}
                 </div>
                 </div>
                 <div className={"game-card " + gameOverClass + gameOverStyle}>
