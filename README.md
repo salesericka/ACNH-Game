@@ -1,7 +1,7 @@
 # Guess The ACNH Villager
 
 Test your knowledge on how many villagers you know in Animal Crossing. 
-Let us know how your highest point!
+Let us know your highest point!
 
 This is project was created for a one-day hackathon in BrainStation.
 
