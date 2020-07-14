@@ -1,5 +1,5 @@
 {
-  "homepage":"http://salesericka.github.io/ACNH-Game",
+  "homepage": "https://salesericka.github.io",
   "name": "pair-program",
   "version": "0.1.0",
   "private": true,
@@ -17,8 +17,8 @@
     "react-scripts": "3.4.1"
   },
   "scripts": {
-    "predeploy":"npm run build",
-    "deploy":"gh-pages -d build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
