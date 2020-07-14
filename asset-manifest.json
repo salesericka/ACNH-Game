@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.c2b25f38.chunk.css",
-    "main.js": "/static/js/main.33e24205.chunk.js",
-    "main.js.map": "/static/js/main.33e24205.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.da14dcc0.js",
-    "runtime-main.js.map": "/static/js/runtime-main.da14dcc0.js.map",
-    "static/js/2.d8f99981.chunk.js": "/static/js/2.d8f99981.chunk.js",
-    "static/js/2.d8f99981.chunk.js.map": "/static/js/2.d8f99981.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.e5fb6da9ec046145b306f829b909cf05.js": "/precache-manifest.e5fb6da9ec046145b306f829b909cf05.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.c2b25f38.chunk.css.map": "/static/css/main.c2b25f38.chunk.css.map",
-    "static/js/2.d8f99981.chunk.js.LICENSE.txt": "/static/js/2.d8f99981.chunk.js.LICENSE.txt",
-    "static/media/NewHorizons.png": "/static/media/NewHorizons.ee6b4980.png"
+    "main.css": "/ACNH-Game/static/css/main.c2b25f38.chunk.css",
+    "main.js": "/ACNH-Game/static/js/main.33e24205.chunk.js",
+    "main.js.map": "/ACNH-Game/static/js/main.33e24205.chunk.js.map",
+    "runtime-main.js": "/ACNH-Game/static/js/runtime-main.43fa7995.js",
+    "runtime-main.js.map": "/ACNH-Game/static/js/runtime-main.43fa7995.js.map",
+    "static/js/2.d8f99981.chunk.js": "/ACNH-Game/static/js/2.d8f99981.chunk.js",
+    "static/js/2.d8f99981.chunk.js.map": "/ACNH-Game/static/js/2.d8f99981.chunk.js.map",
+    "index.html": "/ACNH-Game/index.html",
+    "precache-manifest.f98b8d160bfd8c727513015ebe4bcdf1.js": "/ACNH-Game/precache-manifest.f98b8d160bfd8c727513015ebe4bcdf1.js",
+    "service-worker.js": "/ACNH-Game/service-worker.js",
+    "static/css/main.c2b25f38.chunk.css.map": "/ACNH-Game/static/css/main.c2b25f38.chunk.css.map",
+    "static/js/2.d8f99981.chunk.js.LICENSE.txt": "/ACNH-Game/static/js/2.d8f99981.chunk.js.LICENSE.txt",
+    "static/media/NewHorizons.png": "/ACNH-Game/static/media/NewHorizons.ee6b4980.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.da14dcc0.js",
+    "static/js/runtime-main.43fa7995.js",
     "static/js/2.d8f99981.chunk.js",
     "static/css/main.c2b25f38.chunk.css",
     "static/js/main.33e24205.chunk.js"
